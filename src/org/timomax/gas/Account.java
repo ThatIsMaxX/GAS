@@ -14,8 +14,6 @@ import java.util.Base64;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-import com.mysql.jdbc.PreparedStatement;
-
 
 public class Account {
 	  private static Connection conn = null;
@@ -27,7 +25,6 @@ public class Account {
 		    String dbName = "GAS";
 		    String dbUser = "GAS";
 		    String dbPassword = "uzrqO8bM0SjqYZM4";
-		    String dbPassworda = "Kanino0057";
 		      Class.forName("com.mysql.jdbc.Driver");
 		      conn = DriverManager.getConnection("jdbc:mysql://" + dbHost + ":"
 			          + "3306" + "/" + dbName + "?" + "user=" + dbUser + "&"
@@ -53,7 +50,6 @@ public class Account {
 	public static boolean Register(String username, String email, String password){
 		conn = getInstance();
 		if(conn != null){
-			Statement rS;
 			Statement cfV;
 			try {
 				cfV = conn.createStatement();
@@ -76,6 +72,7 @@ public class Account {
 				ps.setString(3, HashPassword(password, salts));
 				ps.setString(4, salts);
 				ps.executeUpdate();
+				return true;
 			} catch(SQLException e) {
 				e.printStackTrace();
 			}
