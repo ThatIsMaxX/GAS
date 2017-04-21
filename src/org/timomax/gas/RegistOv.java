@@ -8,11 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class RegistOv {
-	public void registOv(){
+	public RegistOv(){
 		JFrame jf = new JFrame();
 		jf.setSize(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height); 
 		jf.setVisible(true);
 		jf.setResizable(false);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel jp = new JPanel();
 		jp.setLayout(null);
