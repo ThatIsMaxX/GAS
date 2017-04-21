@@ -24,20 +24,22 @@ public class Start implements ActionListener{
 		jb.setBounds(jf.getWidth()/4+jb.getWidth()/2, jf.getHeight()/4-jb.getHeight()/2, jf.getWidth()/4, jf.getHeight()/4);
 		jp.add(jb);
 		jb.addActionListener(this);
+		jb.setActionCommand("login");
 		
 		JButton jb1 = new JButton("Regist");
 		jb1.setSize(jf.getWidth()/4, jf.getHeight()/4);
 		jb1.setBounds(jf.getWidth()/2-jb.getWidth()/2, jf.getHeight()/2-jb.getHeight()/2, jf.getWidth()/4, jf.getHeight()/4);
 		jp.add(jb1);
 		jb1.addActionListener(this);
+		jb1.setActionCommand("register");
 		
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == jb){
+		if(e.getActionCommand().equals("login")){
 			LoginOv log = new LoginOv();	
 		}	
-		if(e.getSource() == jb1){
+		if(e.getActionCommand().equals("register")){
 			RegistOv reg = new RegistOv();
 		}
 	}
