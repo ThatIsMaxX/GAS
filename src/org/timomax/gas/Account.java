@@ -1,14 +1,24 @@
 package org.timomax.gas;
 
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Pattern;
 
 public class Account {
 	  private static Connection conn = null;
+	  public static final String ID = "$31$";
+	  public static final int DEFAULT_COST = 16;
+	  private static final String ALGORITHM = "PBKDF2WithHmacSHA1";
+	  private static final int SIZE = 128;
+	  private static final Pattern layout = Pattern.compile("\\$31\\$(\\d\\d?)\\$(.{43})");
+	  private final SecureRandom random = null;
+	  private final int cost = 0;
+	  
 	  private Account() {
 		    try {
 		      Class.forName("com.mysql.jdbc.Driver");
@@ -31,17 +41,18 @@ public class Account {
 		      new Account();
 		    return conn;
 		  }
+		  
 	public static boolean CheckLogin(String username, String password){
 	    conn = getInstance();
-	    String passwordHash = null;
+	    String passwordHash = HashPassword(password);
 	    if(conn != null)
 	    {
 	    	Statement getImageInfo;
 	        try {
 
 	        getImageInfo = conn.createStatement();
-	        String getImageInfosql = "SELECT username, password FROM users WHERE username = '"+username+"'";
-	 	    ResultSet result = getImageInfo.executeQuery(getImageInfosql);
+	        String sql = "SELECT username, password FROM users WHERE username = '"+username+"'";
+	 	    ResultSet result = getImageInfo.executeQuery(sql);
 	 	    while(result.next()){
 	 	    	if(result.getString("password").equals(passwordHash)){
 		 	    	return true;
@@ -54,5 +65,9 @@ public class Account {
 		return false;
 		
 	}
-
+	private static String HashPassword(String pw){
+		String hash = null;
+		return hash;
+	}
+	
 }
